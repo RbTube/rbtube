@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:12
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: deploy
+      POSTGRES_USER: deploy
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  elasticsearch:
+    image: elasticsearch:7.7.1
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    environment:
+    - node.name=es01
+    - cluster.name=es-docker-cluster
+    - discovery.seed_hosts=es02,es03
+    - cluster.initial_master_nodes=es01,es02,es03
+    - bootstrap.memory_lock=true
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+
+volumes:
+  db-data:
+  es-data:
+  redis-data:
