@@ -1,2 +1,2 @@
-# ruby-tube
-Monorepo for RubyTube. Rails + Sidekiq + Node + Nuxt
+# rbtube
+Monorepo for RBTube. Rails + Sidekiq + Node + Nuxt
