@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: "127.0.0.1"
+  port: "5432"
+  username: deploy
+  password: deploy
+
+development:
+  <<: *default
+  database: rt_core_development
+test:
+  <<: *default
+  database: rt_core_test
+
+production:
+  <<: *default
+  database: rt_core_production
+  username: rt_core
+  password: <%= ENV['RT_CORE_DATABASE_PASSWORD'] %>
